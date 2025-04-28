@@ -35,4 +35,17 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
+# WebStorm
+.idea/
+*.iml
+
+# Supabase
+.supabase/
+supabase/.temp/
+**/supabase/.branches/
+**/supabase/.temp/
+.env.local
+service-key.json
+.env.production
+
 app-example
