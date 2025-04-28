@@ -1,4 +1,5 @@
 import '~/global.css';
+import '~/lib/i18n';
 
 import { Theme, ThemeProvider, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { Stack } from 'expo-router';
@@ -35,7 +36,7 @@ export default function RootLayout() {
     }
 
     if (Platform.OS === 'web') {
-      // Adds the background color to the html element to prevent white background on overscroll.
+      // Adds the background color to the HTML element to prevent white background on overscroll.
       document.documentElement.classList.add('bg-background');
     }
     setIsColorSchemeLoaded(true);
