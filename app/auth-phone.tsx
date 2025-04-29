@@ -5,8 +5,10 @@ import {Text} from '@/components/ui/text';
 import { PhoneInput } from '@/components/ui/input';
 import {Button} from '@/components/ui/button';
 import {H2, P} from "@/components/ui/typography";
+import { useTranslation } from "react-i18next";
 
 export default function AuthPhone() {
+    const { t } = useTranslation();
     const [phoneNumber, setPhoneNumber] = useState('+48 ');
 
     const handleSubmit = () => {
@@ -22,21 +24,21 @@ export default function AuthPhone() {
             >
                 <View className="flex-1 px-4 justify-center gap-4">
                     <H2>
-                        Enter your phone number
+                        {t('authPhone.header')}
                     </H2>
                     <P>
-                        We'll send you a verification code to confirm your identity
+                        {t('authPhone.description')}
                     </P>
 
                     <PhoneInput
-                        placeholder="Phone number"
+                        placeholder={t('authPhone.placeholder')}
                         value={phoneNumber}
                         onChangeText={setPhoneNumber}
                         autoComplete="tel"
                     />
 
                     <Button onPress={handleSubmit}>
-                        <Text className="text-white font-semibold">Continue</Text>
+                        <Text className="text-white font-semibold">{t('authPhone.button')}</Text>
                     </Button>
                 </View>
             </KeyboardAvoidingView>
