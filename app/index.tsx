@@ -1,9 +1,13 @@
 import { View } from "react-native";
 import { useTranslation } from "react-i18next";
-import { H1, P } from "~/components/ui/typography"
+import { H1 } from "~/components/ui/typography"
+import {Button} from "@/components/ui/button";
+import {Text} from "@/components/ui/text";
+import {useRouter} from "expo-router";
 
 export default function Index() {
   const { t } = useTranslation();
+  const { replace } = useRouter();
 
   return (
     <View
@@ -15,7 +19,9 @@ export default function Index() {
       }}
     >
       <H1>{t('welcome.header')}</H1>
-      <P>{t('welcome.text')}</P>
+        <Button onPress={() => replace('/auth-phone')}>
+            <Text className="text-white font-semibold">{t('welcome.text')}</Text>
+        </Button>
 
     </View>
   );
