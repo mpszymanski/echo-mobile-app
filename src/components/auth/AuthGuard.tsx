@@ -12,10 +12,10 @@ type AuthGuardProps = {
   showErrors?: boolean;
 };
 
-export function AuthGuard({ 
-  children, 
+export function AuthGuard({
+  children,
   redirectTo = '/feed' as Route,
-  showErrors = false
+  showErrors = false,
 }: AuthGuardProps) {
   const { t } = useTranslation();
   const { isAuthenticated, isLoading, error } = useAuth();
@@ -29,11 +29,16 @@ export function AuthGuard({
 
   if (isLoading) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f5f5f5' }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#f5f5f5',
+        }}
+      >
         <ActivityIndicator size="large" color="#0000ff" />
-        <Text style={{ marginTop: 10, fontSize: 16, color: '#333' }}>
-          {t('auth.checking')}
-        </Text>
+        <Text style={{ marginTop: 10, fontSize: 16, color: '#333' }}>{t('auth.checking')}</Text>
       </View>
     );
   }

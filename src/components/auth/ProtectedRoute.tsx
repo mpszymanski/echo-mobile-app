@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import {Route, useRouter} from 'expo-router';
+import { Route, useRouter } from 'expo-router';
 import { useAuth } from '~/contexts/auth';
 import { View, ActivityIndicator, Text } from 'react-native';
 import { useTranslation } from 'react-i18next';
@@ -10,10 +10,10 @@ type ProtectedRouteProps = {
   showErrors?: boolean;
 };
 
-export function ProtectedRoute({ 
-  children, 
+export function ProtectedRoute({
+  children,
   redirectTo = '/' as Route,
-  showErrors = false
+  showErrors = false,
 }: ProtectedRouteProps) {
   const { t } = useTranslation();
   const { isAuthenticated, isLoading, error } = useAuth();
@@ -27,11 +27,16 @@ export function ProtectedRoute({
 
   if (isLoading) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f5f5f5' }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#f5f5f5',
+        }}
+      >
         <ActivityIndicator size="large" color="#0000ff" />
-        <Text style={{ marginTop: 10, fontSize: 16, color: '#333' }}>
-          {t('auth.checking')}
-        </Text>
+        <Text style={{ marginTop: 10, fontSize: 16, color: '#333' }}>{t('auth.checking')}</Text>
       </View>
     );
   }

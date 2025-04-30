@@ -66,14 +66,14 @@ export default function ProfileCreation() {
 
   return (
     <ProtectedRoute>
-      <View className="flex-1 p-4 bg-background">
+      <View className="flex-1 bg-background p-4">
         {isLoading ? (
-          <View className="flex-1 justify-center items-center">
+          <View className="flex-1 items-center justify-center">
             <ActivityIndicator size="large" color="#0000ff" />
             <Text className="mt-4 text-foreground">{t('profile.loading')}</Text>
           </View>
         ) : (
-          <View className="flex-1 justify-center items-center">
+          <View className="flex-1 items-center justify-center">
             <H1 className="mb-8 text-center">{t('profile.createTitle')}</H1>
 
             <View className="w-full max-w-sm">
@@ -86,16 +86,14 @@ export default function ProfileCreation() {
                 autoCapitalize="words"
               />
 
-              {error && (
-                <Text className="mb-4 text-destructive">{error}</Text>
-              )}
+              {error && <Text className="mb-4 text-destructive">{error}</Text>}
 
-              <Button 
-                onPress={handleCreateProfile} 
+              <Button
+                onPress={handleCreateProfile}
                 disabled={isSubmitting || !displayName.trim()}
                 className="mt-4"
               >
-                <Text className="text-white font-semibold">
+                <Text className="font-semibold text-white">
                   {isSubmitting ? t('profile.creating') : t('profile.create')}
                 </Text>
               </Button>

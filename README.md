@@ -54,3 +54,42 @@ Join our community of developers creating universal apps.
 This code is licensed under the Business Source License 1.1. You may view, modify, and contribute to the code, but not use it to create a competing social media application.
 
 See the [LICENSE](LICENSE) file for more details.
+
+## Code Formatting with Prettier
+
+This project uses Prettier for code formatting to ensure a consistent code style across the codebase.
+
+### Configuration
+
+The Prettier configuration is defined in `.prettierrc.js` and follows the popular Expo style with the following key settings:
+
+- Single quotes
+- 2 spaces indentation
+- 100 character line width
+- ES5 trailing commas
+- Semicolons at the end of statements
+- Tailwind CSS class sorting (via prettier-plugin-tailwindcss)
+
+### Usage
+
+The following npm scripts have been added to package.json:
+
+- `npm run format` - Format all eligible files in the project
+- `npm run format:check` - Check if files are formatted correctly without modifying them
+
+### Integration with ESLint
+
+Prettier has been integrated with ESLint using `eslint-config-prettier` to disable ESLint rules that might conflict with Prettier's formatting.
+
+### Ignored Files
+
+Some files and directories are excluded from formatting. See `.prettierignore` for the complete list.
+
+### Editor Integration
+
+For the best development experience, it's recommended to install the Prettier extension for your code editor:
+
+- VS Code: [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- WebStorm/IntelliJ: [Prettier](https://plugins.jetbrains.com/plugin/10456-prettier)
+
+Configure your editor to format on save for a seamless experience.

@@ -1,49 +1,64 @@
 import * as React from 'react';
 import { TextInput, type TextInputProps } from 'react-native';
-import { default as MaskInput, type MaskInputProps } from "react-native-mask-input";
+import { default as MaskInput, type MaskInputProps } from 'react-native-mask-input';
 import { cn } from '~/lib/rnr/utils';
 
 const inputBaseStyles =
-    'web:flex h-10 native:h-12 web:w-full rounded-md border border-input bg-background px-3 web:py-2 ' +
-    'text-base lg:text-sm native:text-lg native:leading-[1.25] text-foreground placeholder:text-muted-foreground ' +
-    'web:ring-offset-background file:border-0 file:bg-transparent file:font-medium ' +
-    'web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2';
+  'web:flex h-10 native:h-12 web:w-full rounded-md border border-input bg-background px-3 web:py-2 ' +
+  'text-base lg:text-sm native:text-lg native:leading-[1.25] text-foreground placeholder:text-muted-foreground ' +
+  'web:ring-offset-background file:border-0 file:bg-transparent file:font-medium ' +
+  'web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2';
 
-const phoneMask = ['+', '4', '8', " ", /\d/, /\d/, /\d/, " ",/\d/, /\d/, /\d/, " ",/\d/, /\d/, /\d/];
+const phoneMask = [
+  '+',
+  '4',
+  '8',
+  ' ',
+  /\d/,
+  /\d/,
+  /\d/,
+  ' ',
+  /\d/,
+  /\d/,
+  /\d/,
+  ' ',
+  /\d/,
+  /\d/,
+  /\d/,
+];
 
 const PhoneInput = React.forwardRef<React.ElementRef<typeof MaskInput>, MaskInputProps>(
-    ({ className, placeholderClassName, ...props }, ref) => (
-        <MaskInput
-            ref={ref}
-            className={cn(
-                inputBaseStyles,
-                props.editable === false && 'opacity-50 web:cursor-not-allowed',
-                className
-            )}
-
-            placeholderClassName={cn('text-muted-foreground', placeholderClassName)}
-            keyboardType="phone-pad"
-            mask={phoneMask}
-            {...props}
-        />
-    )
+  ({ className, placeholderClassName, ...props }, ref) => (
+    <MaskInput
+      ref={ref}
+      className={cn(
+        inputBaseStyles,
+        props.editable === false && 'opacity-50 web:cursor-not-allowed',
+        className
+      )}
+      placeholderClassName={cn('text-muted-foreground', placeholderClassName)}
+      keyboardType="phone-pad"
+      mask={phoneMask}
+      {...props}
+    />
+  )
 );
 
 MaskInput.displayName = 'MaskInput';
 
 const Input = React.forwardRef<React.ElementRef<typeof TextInput>, TextInputProps>(
-    ({ className, placeholderClassName, ...props }, ref) => (
-        <TextInput
-            ref={ref}
-            className={cn(
-                inputBaseStyles,
-                props.editable === false && 'opacity-50 web:cursor-not-allowed',
-                className
-            )}
-            placeholderClassName={cn('text-muted-foreground', placeholderClassName)}
-            {...props}
-        />
-    )
+  ({ className, placeholderClassName, ...props }, ref) => (
+    <TextInput
+      ref={ref}
+      className={cn(
+        inputBaseStyles,
+        props.editable === false && 'opacity-50 web:cursor-not-allowed',
+        className
+      )}
+      placeholderClassName={cn('text-muted-foreground', placeholderClassName)}
+      {...props}
+    />
+  )
 );
 
 Input.displayName = 'Input';

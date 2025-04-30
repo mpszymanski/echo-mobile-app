@@ -11,5 +11,7 @@ export interface AuthRepository {
   getSession(): Promise<Session | null>;
   getUser(): Promise<User | null>;
   signOut(): Promise<void>;
-  onAuthStateChange(callback: (event: string, session: Session | null) => void): { unsubscribe: () => void };
+  onAuthStateChange(callback: (event: string, session: Session | null) => void): {
+    unsubscribe: () => void;
+  };
 }

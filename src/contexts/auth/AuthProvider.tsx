@@ -29,62 +29,68 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   // Helper function to check if user has a profile
-  const checkUserProfile = useCallback(async (userId: string | null) => {
-    if (!userId) {
-      setProfile(null);
-      setHasProfile(false);
-      return;
-    }
-
-    setIsCheckingProfile(true);
-
-    try {
-      const profile = await getProfile(userId);
-
-      if (!profile) {
+  const checkUserProfile = useCallback(
+    async (userId: string | null) => {
+      if (!userId) {
         setProfile(null);
         setHasProfile(false);
-
-        // Redirect to profile creation if authenticated
-        if (isAuthenticated) {
-          router.replace('/profile');
-        }
-      } else {
-        setProfile(profile);
-        setHasProfile(true);
+        return;
       }
-    } catch (err) {
-      console.error('Error checking profile:', err);
-      // Don't set error state here to avoid disrupting the auth flow
-    } finally {
-      setIsCheckingProfile(false);
-    }
-  }, [isAuthenticated, router]);
+
+      setIsCheckingProfile(true);
+
+      try {
+        const profile = await getProfile(userId);
+
+        if (!profile) {
+          setProfile(null);
+          setHasProfile(false);
+
+          // Redirect to profile creation if authenticated
+          if (isAuthenticated) {
+            router.replace('/profile');
+          }
+        } else {
+          setProfile(profile);
+          setHasProfile(true);
+        }
+      } catch (err) {
+        console.error('Error checking profile:', err);
+        // Don't set error state here to avoid disrupting the auth flow
+      } finally {
+        setIsCheckingProfile(false);
+      }
+    },
+    [isAuthenticated, router]
+  );
 
   // Helper function to update user state
-  const updateUserState = useCallback(async (currentSession: Session | null) => {
-    setSession(currentSession);
-    setIsAuthenticated(!!currentSession);
+  const updateUserState = useCallback(
+    async (currentSession: Session | null) => {
+      setSession(currentSession);
+      setIsAuthenticated(!!currentSession);
 
-    if (currentSession) {
-      const userData = await auth.getUser();
+      if (currentSession) {
+        const userData = await auth.getUser();
 
-      if (!userData) {
-        throw new Error('Failed to get user data');
+        if (!userData) {
+          throw new Error('Failed to get user data');
+        }
+
+        setUser(userData);
+
+        // Check if user has a profile
+        await checkUserProfile(userData?.id ?? null);
+      } else {
+        setUser(null);
+        setProfile(null);
+        setHasProfile(false);
       }
 
-      setUser(userData);
-
-      // Check if user has a profile
-      await checkUserProfile(userData?.id ?? null);
-    } else {
-      setUser(null);
-      setProfile(null);
-      setHasProfile(false);
-    }
-
-    setError(null);
-  }, [checkUserProfile]);
+      setError(null);
+    },
+    [checkUserProfile]
+  );
 
   const checkAuth = useCallback(async () => {
     try {
@@ -122,17 +128,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     checkAuth();
 
     // Set up auth state change listener
-    const authListener = auth.onAuthStateChange(
-      async (event, currentSession) => {
-        try {
-          await updateUserState(currentSession);
-        } catch (err) {
-          handleAuthError(err, t('auth.errors.stateChange'));
-        } finally {
-          setIsLoading(false);
-        }
+    const authListener = auth.onAuthStateChange(async (event, currentSession) => {
+      try {
+        await updateUserState(currentSession);
+      } catch (err) {
+        handleAuthError(err, t('auth.errors.stateChange'));
+      } finally {
+        setIsLoading(false);
       }
-    );
+    });
 
     return () => {
       authListener.unsubscribe();
@@ -140,18 +144,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [checkAuth, handleAuthError, updateUserState, t]);
 
   return (
-    <AuthContext.Provider value={{ 
-      isAuthenticated, 
-      isLoading, 
-      user, 
-      session, 
-      profile,
-      hasProfile,
-      isCheckingProfile,
-      error, 
-      signOut, 
-      refreshAuth 
-    }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        isLoading,
+        user,
+        session,
+        profile,
+        hasProfile,
+        isCheckingProfile,
+        error,
+        signOut,
+        refreshAuth,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

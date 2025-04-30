@@ -6,7 +6,7 @@ import { parsePhone } from '~/utils/phone';
 export class SupabaseAuthRepository implements AuthRepository {
   async signInWithOtp(phone: string): Promise<void> {
     const { error } = await supabase.auth.signInWithOtp({
-      phone: parsePhone(phone)
+      phone: parsePhone(phone),
     });
 
     if (error) {
@@ -18,7 +18,7 @@ export class SupabaseAuthRepository implements AuthRepository {
     const { data, error } = await supabase.auth.verifyOtp({
       phone: parsePhone(phone),
       token: otp,
-      type: 'sms'
+      type: 'sms',
     });
 
     if (error) {
@@ -27,7 +27,7 @@ export class SupabaseAuthRepository implements AuthRepository {
 
     return {
       user: data.user!,
-      session: data.session!
+      session: data.session!,
     };
   }
 
@@ -66,7 +66,7 @@ export class SupabaseAuthRepository implements AuthRepository {
         if (data && data.subscription) {
           data.subscription.unsubscribe();
         }
-      }
+      },
     };
   }
 }

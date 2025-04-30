@@ -23,7 +23,7 @@ export {
   ErrorBoundary,
 } from 'expo-router';
 
-import "../../global.css"
+import '../../global.css';
 
 export default function RootLayout() {
   const hasMounted = React.useRef(false);
@@ -48,14 +48,14 @@ export default function RootLayout() {
   }
 
   return (
-      <AuthProvider>
-        <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-          <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-          <Stack screenOptions={{ headerShown: false }} />
-        </ThemeProvider>
-      </AuthProvider>
+    <AuthProvider>
+      <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
+        <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
+        <Stack screenOptions={{ headerShown: false }} />
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
 
 const useIsomorphicLayoutEffect =
-    Platform.OS === 'web' && typeof window === 'undefined' ? React.useEffect : React.useLayoutEffect;
+  Platform.OS === 'web' && typeof window === 'undefined' ? React.useEffect : React.useLayoutEffect;
