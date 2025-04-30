@@ -21,6 +21,20 @@ export default {
         verifyOTP: 'Hmm, ten kod nie wydaje się poprawny. Sprawdź go dokładnie i spróbuj ponownie lub poproś o nowy kod.'
       }
     },
+    profile: {
+      createTitle: 'Utwórz swój profil',
+      displayNameLabel: 'Nazwa wyświetlana',
+      displayNamePlaceholder: 'Wprowadź swoją nazwę',
+      create: 'Utwórz profil',
+      creating: 'Tworzenie profilu...',
+      loading: 'Sprawdzanie profilu...',
+      errors: {
+        nameRequired: 'Nazwa wyświetlana jest wymagana',
+        notAuthenticated: 'Musisz być zalogowany, aby utworzyć profil',
+        checkFailed: 'Nie udało się sprawdzić profilu. Spróbuj ponownie.',
+        createFailed: 'Nie udało się utworzyć profilu. Spróbuj ponownie.'
+      }
+    },
     auth: {
       checking: 'Chwileczkę, przygotowujemy wszystko dla Ciebie...',
       error: 'Ups! Coś poszło nie tak',
