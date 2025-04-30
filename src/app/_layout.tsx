@@ -5,8 +5,8 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { Platform } from 'react-native';
-import { NAV_THEME } from '~/lib/constants';
-import { useColorScheme } from '~/hooks/useColorScheme';
+import { NAV_THEME } from '~/lib/rnr/constants';
+import { useColorScheme } from '~/lib/rnr/useColorScheme';
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,

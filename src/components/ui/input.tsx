@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TextInput, type TextInputProps } from 'react-native';
 import { default as MaskInput, type MaskInputProps } from "react-native-mask-input";
-import { cn } from '~/lib/utils';
+import { cn } from '~/lib/rnr/utils';
 
 const inputBaseStyles =
     'web:flex h-10 native:h-12 web:w-full rounded-md border border-input bg-background px-3 web:py-2 ' +
