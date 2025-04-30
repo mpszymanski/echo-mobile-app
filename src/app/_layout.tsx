@@ -7,6 +7,7 @@ import * as React from 'react';
 import { Platform } from 'react-native';
 import { NAV_THEME } from '~/lib/rnr/constants';
 import { useColorScheme } from '~/lib/rnr/useColorScheme';
+import { AuthProvider } from '~/contexts/AuthContext';
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -47,10 +48,12 @@ export default function RootLayout() {
   }
 
   return (
-      <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-        <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-        <Stack screenOptions={{ headerShown: false }} />
-      </ThemeProvider>
+      <AuthProvider>
+        <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
+          <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
+          <Stack screenOptions={{ headerShown: false }} />
+        </ThemeProvider>
+      </AuthProvider>
   );
 }
 
