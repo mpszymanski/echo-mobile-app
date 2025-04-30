@@ -7,7 +7,7 @@ import {useRouter} from "expo-router";
 
 export default function Index() {
   const { t } = useTranslation();
-  const { replace } = useRouter();
+  const { push } = useRouter();
 
   return (
     <View
@@ -19,7 +19,7 @@ export default function Index() {
       }}
     >
       <H1>{t('welcome.header')}</H1>
-        <Button onPress={() => replace('/auth/phone')}>
+        <Button onPress={() => push('/auth/phone')}>
             <Text className="text-white font-semibold">{t('welcome.text')}</Text>
         </Button>
 
