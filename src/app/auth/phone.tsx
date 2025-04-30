@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Platform, View, KeyboardAvoidingView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Text} from '~/components/ui/text';
@@ -7,6 +7,8 @@ import {Button} from '~/components/ui/button';
 import {H2, P} from "~/components/ui/typography";
 import { useTranslation } from "react-i18next";
 import {useRouter} from "expo-router";
+import {sendOTP} from "~/features/auth/sendOTP";
+import {isAuthenticated} from "~/features/auth/isAuthenticated";
 
 const inputLength = 15;
 
@@ -15,13 +17,21 @@ export default function Phone() {
     const { push } = useRouter();
     const [phoneNumber, setPhoneNumber] = useState('+48 ');
 
-    const handleSubmit = () => {
-        // Handle phone number submission
-        console.log('Phone number submitted:', phoneNumber);
-        push({
-            pathname: '/auth/token',
-            params: { phoneNumber }
-        });
+    useEffect(() => {
+        isAuthenticated().then(value => value && push('/feed'))
+    }, []);
+
+    const handleSubmit = async () => {
+        try {
+            await sendOTP(phoneNumber);
+
+            push({
+                pathname: '/auth/token',
+                params: { phoneNumber }
+            });
+        } catch (err) {
+            console.log('Error sending OTP:', err);
+        }
     };
 
     return (

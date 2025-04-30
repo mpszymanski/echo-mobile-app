@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Platform, View, KeyboardAvoidingView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Text} from '~/components/ui/text';
@@ -7,6 +7,8 @@ import {H2, P} from "~/components/ui/typography";
 import {useTranslation} from "react-i18next";
 import {CodeField} from '~/components/ui/code-field';
 import {useLocalSearchParams, useRouter} from "expo-router";
+import {verifyOTP} from "~/features/auth/verifyOTP";
+import {isAuthenticated} from "~/features/auth/isAuthenticated";
 
 const inputLength = 4;
 
@@ -16,12 +18,18 @@ export default function Token() {
     const { phoneNumber } = useLocalSearchParams();
     const [code, setCode] = useState('');
 
-    const handleSubmit = () => {
-        // Handle verification code submission
-        console.log('Verification code submitted:', code);
-        console.log('Phone number:', phoneNumber);
+    useEffect(() => {
+        isAuthenticated().then(value => value && push('/feed'))
+    }, []);
 
-        push('/feed');
+    const handleSubmit = async () => {
+        try {
+            await verifyOTP(phoneNumber as string, code);
+
+            push('/feed');
+        } catch (err) {
+            console.log('Error verifying OTP:', err);
+        }
     };
 
     return (

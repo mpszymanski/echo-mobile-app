@@ -1,15 +1,21 @@
 import { View } from "react-native";
 import { useTranslation } from "react-i18next";
+import {useEffect} from "react";
 import { H1 } from "~/components/ui/typography"
 import {Button} from "~/components/ui/button";
 import {Text} from "~/components/ui/text";
 import {useRouter} from "expo-router";
+import {isAuthenticated} from "~/features/auth/isAuthenticated";
 
 export default function Index() {
   const { t } = useTranslation();
   const { push } = useRouter();
 
-  return (
+    useEffect(() => {
+        isAuthenticated().then(value => value && push('/feed'))
+    }, []);
+
+    return (
     <View
       style={{
         flex: 1,

@@ -1,8 +1,9 @@
 import {supabase} from "~/api/supabase";
+import {parsePhone} from "~/utils/phone";
 
 export const sendOTP = async (phone: string) => {
     const { data, error } = await supabase.auth.signInWithOtp({
-        phone
+        phone: parsePhone(phone)
     })
 
     if (error) {
