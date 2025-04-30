@@ -1,4 +1,3 @@
-import '~/global.css';
 import '~/lib/i18n';
 
 import { Theme, ThemeProvider, DefaultTheme, DarkTheme } from '@react-navigation/native';
@@ -7,7 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { Platform } from 'react-native';
 import { NAV_THEME } from '~/lib/constants';
-import { useColorScheme } from '~/lib/useColorScheme';
+import { useColorScheme } from '~/hooks/useColorScheme';
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -23,7 +22,7 @@ export {
   ErrorBoundary,
 } from 'expo-router';
 
-import "../global.css"
+import "../../global.css"
 
 export default function RootLayout() {
   const hasMounted = React.useRef(false);

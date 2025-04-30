@@ -1,13 +1,13 @@
 import {useState} from 'react';
 import {Platform, View, KeyboardAvoidingView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {Text} from '@/components/ui/text';
-import { PhoneInput } from '@/components/ui/input';
-import {Button} from '@/components/ui/button';
-import {H2, P} from "@/components/ui/typography";
+import {Text} from '~/components/ui/text';
+import { PhoneInput } from '~/components/ui/input';
+import {Button} from '~/components/ui/button';
+import {H2, P} from "~/components/ui/typography";
 import { useTranslation } from "react-i18next";
 
-export default function AuthPhone() {
+export default function Phone() {
     const { t } = useTranslation();
     const [phoneNumber, setPhoneNumber] = useState('+48 ');
 
