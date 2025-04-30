@@ -1,9 +1,12 @@
 import {View, Text} from 'react-native';
 import { ProtectedRoute } from "~/components/auth/ProtectedRoute";
 import { useAuth } from "~/contexts/AuthContext";
+import { Button } from "~/components/ui/button";
+import { useTranslation } from 'react-i18next';
 
 export default function Feed() {
-    const { user, error } = useAuth();
+    const { user, error, signOut } = useAuth();
+    const { t } = useTranslation();
 
     return (
         <ProtectedRoute>
@@ -14,6 +17,13 @@ export default function Feed() {
                 <Text className="mt-4 text-foreground">
                     {error ? error.message : JSON.stringify(user, null, 2)}
                 </Text>
+                <Button 
+                    className="mt-8" 
+                    variant="destructive" 
+                    onPress={signOut}
+                >
+                    <Text>{t('auth.logout')}</Text>
+                </Button>
             </View>
         </ProtectedRoute>
     );

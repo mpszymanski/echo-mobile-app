@@ -24,7 +24,7 @@ export default function Token() {
 
             push('/feed');
         } catch (err) {
-            console.log('Error verifying OTP:', err);
+            console.log(t('authToken.errors.verifyOTP'), err);
         }
     };
 

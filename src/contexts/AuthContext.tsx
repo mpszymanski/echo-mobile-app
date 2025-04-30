@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, useContext, useCallback } from 'react';
 import { supabase } from "~/api/supabase";
 import { User, Session } from '@supabase/supabase-js';
+import { useTranslation } from 'react-i18next';
 
 type AuthContextType = {
   isAuthenticated: boolean;
@@ -15,6 +16,7 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const { t } = useTranslation();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [user, setUser] = useState<User | null>(null);
@@ -60,7 +62,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       await updateUserState(currentSession);
     } catch (err) {
-      handleAuthError(err, 'Unknown authentication error');
+      handleAuthError(err, t('auth.errors.unknown'));
     } finally {
       setIsLoading(false);
     }
@@ -79,7 +81,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setSession(null);
       setError(null);
     } catch (err) {
-      handleAuthError(err, 'Unknown sign out error');
+      handleAuthError(err, t('auth.errors.signOut'));
     }
   }, [handleAuthError]);
 
@@ -98,7 +100,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         try {
           await updateUserState(currentSession);
         } catch (err) {
-          handleAuthError(err, 'Auth state change error');
+          handleAuthError(err, t('auth.errors.stateChange'));
         } finally {
           setIsLoading(false);
         }
@@ -129,9 +131,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
 // Custom hook for using the auth context
 export function useAuth() {
+  const { t } = useTranslation();
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error(t('auth.errors.useAuthHook'));
   }
   return context;
 }

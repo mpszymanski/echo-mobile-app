@@ -26,7 +26,7 @@ export default function Phone() {
                 params: { phoneNumber }
             });
         } catch (err) {
-            console.log('Error sending OTP:', err);
+            console.log(t('authPhone.errors.sendOTP'), err);
         }
     };
 
