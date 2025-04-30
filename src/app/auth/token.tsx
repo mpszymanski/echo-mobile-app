@@ -6,12 +6,13 @@ import {Button} from '~/components/ui/button';
 import {H2, P} from "~/components/ui/typography";
 import {useTranslation} from "react-i18next";
 import {CodeField} from '~/components/ui/code-field';
-import {useLocalSearchParams} from "expo-router";
+import {useLocalSearchParams, useRouter} from "expo-router";
 
 const inputLength = 4;
 
 export default function Token() {
     const {t} = useTranslation();
+    const { push } = useRouter();
     const { phoneNumber } = useLocalSearchParams();
     const [code, setCode] = useState('');
 
@@ -19,6 +20,8 @@ export default function Token() {
         // Handle verification code submission
         console.log('Verification code submitted:', code);
         console.log('Phone number:', phoneNumber);
+
+        push('/feed');
     };
 
     return (
