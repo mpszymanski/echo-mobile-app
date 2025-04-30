@@ -7,7 +7,7 @@ import * as React from 'react';
 import { Platform } from 'react-native';
 import { NAV_THEME } from '~/lib/rnr/constants';
 import { useColorScheme } from '~/lib/rnr/useColorScheme';
-import { AuthProvider } from '~/contexts/AuthContext';
+import { AuthProvider } from '~/contexts/auth';
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,

@@ -1,6 +1,6 @@
 import {View, Text} from 'react-native';
 import { ProtectedRoute } from "~/components/auth/ProtectedRoute";
-import { useAuth } from "~/contexts/AuthContext";
+import { useAuth } from "~/contexts/auth";
 import { Button } from "~/components/ui/button";
 import { useTranslation } from 'react-i18next';
 

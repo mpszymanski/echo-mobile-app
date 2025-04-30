@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { supabase } from '~/api/supabase';
-import { useAuth } from '~/contexts/AuthContext';
+import { useAuth } from '~/contexts/auth';
+import { createProfile } from '~/features/profile';
 import { ProtectedRoute } from '~/components/auth/ProtectedRoute';
 import { Input } from '~/components/ui/input';
 import { Button } from '~/components/ui/button';
@@ -49,18 +49,7 @@ export default function ProfileCreation() {
     setError(null);
 
     try {
-      const { error } = await supabase
-        .from('profiles')
-        .insert([
-          {
-            user_id: user.id,
-            display_name: displayName.trim(),
-          }
-        ])
-        .select()
-        .single();
-
-      if (error) throw error;
+      await createProfile(user.id, displayName.trim());
 
       // Refresh auth to include the new profile data
       await refreshAuth();

@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { supabase } from "~/api/supabase";
 import { User, Session } from '@supabase/supabase-js';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'expo-router';
 import AuthContext from './AuthContext';
 import { Profile } from './types';
+import { auth } from '~/data';
+import { getProfile } from '~/features/profile';
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const { t } = useTranslation();
@@ -38,26 +39,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setIsCheckingProfile(true);
 
     try {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('user_id', userId)
-        .single();
+      const profile = await getProfile(userId);
 
-      if (error) {
-        if (error.code === 'PGRST116') { // No rows returned
-          setProfile(null);
-          setHasProfile(false);
+      if (!profile) {
+        setProfile(null);
+        setHasProfile(false);
 
-          // Redirect to profile creation if authenticated
-          if (isAuthenticated) {
-            router.replace('/profile');
-          }
-        } else {
-          throw error;
+        // Redirect to profile creation if authenticated
+        if (isAuthenticated) {
+          router.replace('/profile');
         }
-      } else if (data) {
-        setProfile(data as Profile);
+      } else {
+        setProfile(profile);
         setHasProfile(true);
       }
     } catch (err) {
@@ -74,10 +67,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setIsAuthenticated(!!currentSession);
 
     if (currentSession) {
-      const { data: { user: userData }, error: userError } = await supabase.auth.getUser();
+      const userData = await auth.getUser();
 
-      if (userError) {
-        throw userError;
+      if (!userData) {
+        throw new Error('Failed to get user data');
       }
 
       setUser(userData);
@@ -95,12 +88,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const checkAuth = useCallback(async () => {
     try {
-      const { data: { session: currentSession }, error: sessionError } = await supabase.auth.getSession();
-
-      if (sessionError) {
-        throw sessionError;
-      }
-
+      const currentSession = await auth.getSession();
       await updateUserState(currentSession);
     } catch (err) {
       handleAuthError(err, t('auth.errors.unknown'));
@@ -111,11 +99,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = useCallback(async () => {
     try {
-      const { error: signOutError } = await supabase.auth.signOut();
-
-      if (signOutError) {
-        throw signOutError;
-      }
+      await auth.signOut();
 
       setIsAuthenticated(false);
       setUser(null);
@@ -138,7 +122,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     checkAuth();
 
     // Set up auth state change listener
-    const { data: authListener } = supabase.auth.onAuthStateChange(
+    const authListener = auth.onAuthStateChange(
       async (event, currentSession) => {
         try {
           await updateUserState(currentSession);
@@ -151,9 +135,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     );
 
     return () => {
-      if (authListener && authListener.subscription) {
-        authListener.subscription.unsubscribe();
-      }
+      authListener.unsubscribe();
     };
   }, [checkAuth, handleAuthError, updateUserState, t]);
 
