@@ -34,9 +34,6 @@ const CodeField = React.forwardRef<React.ElementRef<typeof RNCodeField>, CodeFie
                 } else if (ref) {
                     ref.current = node;
                 }
-                if (codeFieldRef) {
-                    codeFieldRef.current = node;
-                }
             },
             [ref, codeFieldRef]
         );
