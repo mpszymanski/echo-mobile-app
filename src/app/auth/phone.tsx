@@ -9,12 +9,14 @@ import { useTranslation } from 'react-i18next';
 import { useRouter } from 'expo-router';
 import { sendOTP } from '~/features/auth/sendOTP';
 import { AuthGuard } from '~/components/auth/AuthGuard';
+import { useToast } from '~/utils/useToast';
 
 const inputLength = 15;
 
 export default function Phone() {
   const { t } = useTranslation();
   const { push } = useRouter();
+  const { showError } = useToast();
   const [phoneNumber, setPhoneNumber] = useState('+48 ');
 
   const handleSubmit = async () => {
@@ -26,7 +28,7 @@ export default function Phone() {
         params: { phoneNumber },
       });
     } catch (err) {
-      console.log(t('authPhone.errors.sendOTP'), err);
+      showError(t('authPhone.errors.sendOTP'));
     }
   };
 

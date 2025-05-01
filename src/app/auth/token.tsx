@@ -9,13 +9,15 @@ import { CodeField } from '~/components/ui/code-field';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { verifyOTP } from '~/features/auth/verifyOTP';
 import { AuthGuard } from '~/components/auth/AuthGuard';
+import { useToast } from '~/utils/useToast';
 
-const inputLength = 4;
+const inputLength = 6;
 
 export default function Token() {
   const { t } = useTranslation();
   const { push } = useRouter();
   const { phoneNumber } = useLocalSearchParams();
+  const { showError } = useToast();
   const [code, setCode] = useState('');
 
   const handleSubmit = async () => {
@@ -24,7 +26,7 @@ export default function Token() {
 
       push('/feed');
     } catch (err) {
-      console.log(t('authToken.errors.verifyOTP'), err);
+      showError(t('authToken.errors.verifyOTP'));
     }
   };
 

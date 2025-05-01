@@ -9,16 +9,17 @@ import { Input } from '~/components/ui/input';
 import { Button } from '~/components/ui/button';
 import { Text } from '~/components/ui/text';
 import { H1 } from '~/components/ui/typography';
+import { useToast } from '~/utils/useToast';
 
 export default function ProfileCreation() {
   const { t } = useTranslation();
   const { user, refreshAuth, hasProfile, isLoading: isAuthLoading } = useAuth();
   const router = useRouter();
+  const { showError } = useToast();
 
   const [displayName, setDisplayName] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   // Check if user already has a profile
   useEffect(() => {
@@ -36,17 +37,16 @@ export default function ProfileCreation() {
 
   const handleCreateProfile = async () => {
     if (!displayName.trim()) {
-      setError(t('profile.errors.nameRequired'));
+      showError(t('profile.errors.nameRequired'));
       return;
     }
 
     if (!user) {
-      setError(t('profile.errors.notAuthenticated'));
+      showError(t('profile.errors.notAuthenticated'));
       return;
     }
 
     setIsSubmitting(true);
-    setError(null);
 
     try {
       await createProfile(user.id, displayName.trim());
@@ -58,7 +58,7 @@ export default function ProfileCreation() {
       router.replace('/feed');
     } catch (err) {
       console.error('Error creating profile:', err);
-      setError(t('profile.errors.createFailed'));
+      showError(t('profile.errors.createFailed'));
     } finally {
       setIsSubmitting(false);
     }
@@ -85,8 +85,6 @@ export default function ProfileCreation() {
                 className="mb-4"
                 autoCapitalize="words"
               />
-
-              {error && <Text className="mb-4 text-destructive">{error}</Text>}
 
               <Button
                 onPress={handleCreateProfile}

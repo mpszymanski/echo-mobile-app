@@ -74,20 +74,22 @@ const CodeField = React.forwardRef<React.ElementRef<typeof RNCodeField>, CodeFie
 CodeField.displayName = 'CodeField';
 
 const styles = StyleSheet.create({
-  codeFieldRoot: {
-    marginTop: 20,
-    marginBottom: 20,
-    width: 280,
-  },
-  cell: {
-    width: 60,
-    height: 60,
-    borderWidth: 1,
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginHorizontal: 5,
-  },
+    codeFieldRoot: {
+        marginTop: 20,
+        marginBottom: 20,
+        width: '100%',
+    },
+    cell: {
+        flex: 1,
+        minWidth: 40,
+        maxWidth: 60,
+        aspectRatio: 1,
+        borderWidth: 1,
+        borderRadius: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginHorizontal: 5,
+    },
   cellLight: {
     borderColor: 'hsl(240 5.9% 90%)', // border light
     backgroundColor: 'hsl(0 0% 100%)', // background light

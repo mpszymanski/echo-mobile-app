@@ -5,6 +5,7 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { Platform } from 'react-native';
+import Toast from 'react-native-toast-message';
 import { NAV_THEME } from '~/lib/rnr/constants';
 import { useColorScheme } from '~/lib/rnr/useColorScheme';
 import { AuthProvider } from '~/contexts/auth';
@@ -24,6 +25,7 @@ export {
 } from 'expo-router';
 
 import '../../global.css';
+import {TOAST_CONFIG} from "~/lib/rnr/toast.config";
 
 export default function RootLayout() {
   const hasMounted = React.useRef(false);
@@ -52,6 +54,7 @@ export default function RootLayout() {
       <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
         <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
         <Stack screenOptions={{ headerShown: false }} />
+        <Toast config={TOAST_CONFIG} />
       </ThemeProvider>
     </AuthProvider>
   );
