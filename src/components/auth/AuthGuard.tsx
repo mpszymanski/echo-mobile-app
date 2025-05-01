@@ -15,13 +15,13 @@ type AuthGuardProps = {
 export function AuthGuard({ children, redirectTo = '/feed' as Route }: AuthGuardProps) {
   const { t } = useTranslation();
   const { isAuthenticated, isLoading } = useAuth();
-  const { push } = useRouter();
+  const { replace } = useRouter();
 
   useEffect(() => {
     if (!isLoading && isAuthenticated) {
-      push(redirectTo);
+      replace(redirectTo);
     }
-  }, [isAuthenticated, isLoading, push, redirectTo]);
+  }, [isAuthenticated, isLoading, replace, redirectTo]);
 
   if (isLoading) {
     return (

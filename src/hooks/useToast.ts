@@ -16,7 +16,6 @@ export function useToast() {
       type: 'error',
       text1: title,
       text2: description,
-      autoHide: false,
     });
   };
 
@@ -43,7 +42,6 @@ export function useToast() {
       type: 'info',
       text1: title,
       text2: description,
-      autoHide: false,
     });
   };
 

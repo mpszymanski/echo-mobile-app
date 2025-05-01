@@ -14,15 +14,15 @@ type ProtectedRouteProps = {
 export function ProtectedRoute({ children, redirectTo = '/' as Route }: ProtectedRouteProps) {
   const { t } = useTranslation();
   const { isAuthenticated, isLoading } = useAuth();
-  const { push } = useRouter();
+  const { replace } = useRouter();
   const { showInfo } = useToast();
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
       showInfo(t('auth.loggedOut'));
-      push(redirectTo);
+      replace(redirectTo);
     }
-  }, [isAuthenticated, isLoading, push, redirectTo, showInfo, t]);
+  }, [isAuthenticated, isLoading, replace, redirectTo, showInfo, t]);
 
   if (isLoading) {
     return (
