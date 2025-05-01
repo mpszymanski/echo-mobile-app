@@ -31,7 +31,6 @@ export default {
     },
     auth: {
       checking: "Just a moment, we're getting things ready for you...",
-      error: 'Oops! Something went wrong',
       logout: 'Logout',
       loggedOut: 'You have been logged out',
       errors: {

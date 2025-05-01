@@ -31,7 +31,6 @@ export default {
     },
     auth: {
       checking: 'Chwileczkę, przygotowujemy wszystko dla Ciebie...',
-      error: 'Ups! Coś poszło nie tak',
       logout: 'Wyloguj',
       loggedOut: 'Zostałeś wylogowany',
       errors: {

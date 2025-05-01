@@ -24,7 +24,7 @@ export default function Token() {
     try {
       await verifyOTP(phoneNumber as string, code);
 
-      push('/feed');
+      push('/onboarding');
     } catch (err) {
       console.error('Error verifying OTP:', err);
       showError(t('authToken.errors.verifyOTP.title'), t('authToken.errors.verifyOTP.description'));

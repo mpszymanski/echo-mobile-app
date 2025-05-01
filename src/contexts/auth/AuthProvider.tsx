@@ -42,9 +42,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           setProfile(null);
           setHasProfile(false);
 
-          // Redirect to profile creation if authenticated
+          // Redirect to onboarding flow if authenticated
           if (isAuthenticated) {
-            router.replace('/profile/onboarding');
+            router.replace('/onboarding');
           }
         } else {
           setProfile(profile);

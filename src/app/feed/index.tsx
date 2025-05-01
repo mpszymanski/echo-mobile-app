@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useToast } from '~/hooks/useToast';
 
 export default function Feed() {
-  const { profile, signOut, isLoading } = useAuth();
+  const { profile, signOut } = useAuth();
   const { t } = useTranslation();
   const { showError } = useToast();
 
@@ -20,12 +20,11 @@ export default function Feed() {
 
   return (
     <ProtectedRoute>
-      <View className="flex-1 items-center justify-center bg-background">
+      <View className="flex-1 items-center justify-center">
         <Text className="text-xl font-semibold text-foreground">You are logged in!</Text>
-        <Text className="mt-4 text-foreground">{isLoading ? 'true' : 'false'}</Text>
         <Text className="mt-4 text-foreground">{JSON.stringify(profile, null, 2)}</Text>
         <Button className="mt-8" variant="destructive" onPress={singUserOut}>
-          <Text>{t('auth.logout')}</Text>
+          <Text className="text-white">{t('auth.logout')}</Text>
         </Button>
       </View>
     </ProtectedRoute>

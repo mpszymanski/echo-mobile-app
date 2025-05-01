@@ -12,7 +12,7 @@ type AuthGuardProps = {
   redirectTo?: Route;
 };
 
-export function AuthGuard({ children, redirectTo = '/feed' as Route }: AuthGuardProps) {
+export function AuthGuard({ children, redirectTo = '/onboarding' as Route }: AuthGuardProps) {
   const { t } = useTranslation();
   const { isAuthenticated, isLoading } = useAuth();
   const { replace } = useRouter();
