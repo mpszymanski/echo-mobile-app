@@ -28,10 +28,8 @@ export default function Phone() {
         params: { phoneNumber },
       });
     } catch (err) {
-      showError(
-        t('authPhone.errors.sendOTP.title'),
-        t('authPhone.errors.sendOTP.description')
-      );
+      console.error('Error sending OTP:', err);
+      showError(t('authPhone.errors.sendOTP.title'), t('authPhone.errors.sendOTP.description'));
     }
   };
 

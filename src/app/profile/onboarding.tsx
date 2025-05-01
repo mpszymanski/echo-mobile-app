@@ -21,7 +21,7 @@ export default function ProfileCreation() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Check if user already has a profile
+  // Check if the user already has a profile
   useEffect(() => {
     // If we already know the profile status from the auth context, use that
     if (!isAuthLoading) {
@@ -44,18 +44,10 @@ export default function ProfileCreation() {
       return;
     }
 
-    if (!user) {
-      showError(
-        t('profile.errors.notAuthenticated.title'),
-        t('profile.errors.notAuthenticated.description')
-      );
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
-      await createProfile(user.id, displayName.trim());
+      await createProfile(user!.id, displayName.trim());
 
       // Refresh auth to include the new profile data
       await refreshAuth();

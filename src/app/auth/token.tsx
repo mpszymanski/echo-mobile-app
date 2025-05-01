@@ -26,10 +26,8 @@ export default function Token() {
 
       push('/feed');
     } catch (err) {
-      showError(
-        t('authToken.errors.verifyOTP.title'),
-        t('authToken.errors.verifyOTP.description')
-      );
+      console.error('Error verifying OTP:', err);
+      showError(t('authToken.errors.verifyOTP.title'), t('authToken.errors.verifyOTP.description'));
     }
   };
 
@@ -41,13 +39,8 @@ export default function Token() {
           className="flex-1"
         >
           <View className="flex-1 justify-center gap-4 px-4">
-            <H2>{t('authToken.header', 'Enter verification code')}</H2>
-            <P>
-              {t(
-                'authToken.description',
-                'We sent a verification code to your phone. Please enter it below.'
-              )}
-            </P>
+            <H2>{t('authToken.header')}</H2>
+            <P>{t('authToken.description')}</P>
 
             <View className="items-center">
               <CodeField

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { User, Session } from '@supabase/supabase-js';
-import { useTranslation } from 'react-i18next';
 import { useRouter } from 'expo-router';
 import AuthContext from './AuthContext';
 import { Profile } from './types';
@@ -8,7 +7,6 @@ import { auth } from '~/data';
 import { getProfile } from '~/features/profile';
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const { t } = useTranslation();
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -17,12 +15,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [hasProfile, setHasProfile] = useState<boolean>(false);
   const [isCheckingProfile, setIsCheckingProfile] = useState<boolean>(false);
-  const [error, setError] = useState<Error | null>(null);
 
   // Helper function to handle authentication errors
-  const handleAuthError = useCallback((err: unknown, errorMessage: string) => {
-    console.error(errorMessage, err);
-    setError(err instanceof Error ? err : new Error(errorMessage));
+  const handleAuthError = useCallback((err: unknown) => {
+    console.error(err);
     setIsAuthenticated(false);
     setUser(null);
     setSession(null);
@@ -48,7 +44,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
           // Redirect to profile creation if authenticated
           if (isAuthenticated) {
-            router.replace('/profile');
+            router.replace('/profile/onboarding');
           }
         } else {
           setProfile(profile);
@@ -56,7 +52,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
       } catch (err) {
         console.error('Error checking profile:', err);
-        // Don't set error state here to avoid disrupting the auth flow
       } finally {
         setIsCheckingProfile(false);
       }
@@ -86,8 +81,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setProfile(null);
         setHasProfile(false);
       }
-
-      setError(null);
     },
     [checkUserProfile]
   );
@@ -97,11 +90,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const currentSession = await auth.getSession();
       await updateUserState(currentSession);
     } catch (err) {
-      handleAuthError(err, t('auth.errors.unknown'));
+      handleAuthError(err);
     } finally {
       setIsLoading(false);
     }
-  }, [handleAuthError, updateUserState, t]);
+  }, [handleAuthError, updateUserState]);
 
   const signOut = useCallback(async () => {
     try {
@@ -112,18 +105,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setSession(null);
       setProfile(null);
       setHasProfile(false);
-      setError(null);
     } catch (err) {
-      handleAuthError(err, t('auth.errors.signOut'));
+      handleAuthError(err);
     }
-  }, [handleAuthError, t]);
+  }, [handleAuthError]);
 
   const refreshAuth = useCallback(async () => {
     setIsLoading(true);
     await checkAuth();
   }, [checkAuth]);
 
-  // Check authentication status on mount
+  // Check authentication status on the mount
   useEffect(() => {
     checkAuth();
 
@@ -132,7 +124,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       try {
         await updateUserState(currentSession);
       } catch (err) {
-        handleAuthError(err, t('auth.errors.stateChange'));
+        handleAuthError(err);
       } finally {
         setIsLoading(false);
       }
@@ -141,7 +133,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => {
       authListener.unsubscribe();
     };
-  }, [checkAuth, handleAuthError, updateUserState, t]);
+  }, [checkAuth, handleAuthError, updateUserState]);
 
   return (
     <AuthContext.Provider
@@ -153,7 +145,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         profile,
         hasProfile,
         isCheckingProfile,
-        error,
         signOut,
         refreshAuth,
       }}

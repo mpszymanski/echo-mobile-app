@@ -1,44 +1,34 @@
-import { useEffect } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { Route, useRouter } from 'expo-router';
 import { useAuth } from '~/contexts/auth';
-import { View, ActivityIndicator, Text } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { useToast } from '~/hooks/useToast';
+import { Text } from '~/components/ui/text';
 
 type ProtectedRouteProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   redirectTo?: Route;
-  showErrors?: boolean;
 };
 
-export function ProtectedRoute({
-  children,
-  redirectTo = '/' as Route,
-  showErrors = false,
-}: ProtectedRouteProps) {
+export function ProtectedRoute({ children, redirectTo = '/' as Route }: ProtectedRouteProps) {
   const { t } = useTranslation();
-  const { isAuthenticated, isLoading, error } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
   const { push } = useRouter();
+  const { showInfo } = useToast();
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
+      showInfo(t('auth.loggedOut'));
       push(redirectTo);
     }
-  }, [isAuthenticated, isLoading, push, redirectTo]);
+  }, [isAuthenticated, isLoading, push, redirectTo, showInfo, t]);
 
   if (isLoading) {
     return (
-      <View className="flex-1 items-center justify-center bg-[#f5f5f5]">
-        <ActivityIndicator size="large" color="#0000ff" />
-        <Text className="mt-2.5 text-base text-[#333]">{t('auth.checking')}</Text>
-      </View>
-    );
-  }
-
-  if (error && showErrors) {
-    return (
-      <View className="flex-1 items-center justify-center p-5">
-        <Text className="mb-2.5 text-base text-red-500">{t('auth.error')}</Text>
-        <Text className="text-center">{error.message}</Text>
+      <View className="flex-1 items-center justify-center">
+        <ActivityIndicator />
+        <Text>{t('auth.checking')}</Text>
       </View>
     );
   }

@@ -12,7 +12,8 @@ export default {
       errors: {
         sendOTP: {
           title: 'Verification Code Error',
-          description: "We couldn't send the verification code. Please check your phone number and try again."
+          description:
+            "We couldn't send the verification code. Please check your phone number and try again.",
         },
       },
     },
@@ -23,7 +24,8 @@ export default {
       errors: {
         verifyOTP: {
           title: 'Invalid Code',
-          description: "That code doesn't seem right. Please double-check and try again, or request a new code."
+          description:
+            "That code doesn't seem right. Please double-check and try again, or request a new code.",
         },
       },
     },
@@ -31,28 +33,17 @@ export default {
       checking: "Just a moment, we're getting things ready for you...",
       error: 'Oops! Something went wrong',
       logout: 'Logout',
+      loggedOut: 'You have been logged out',
       errors: {
-        unknown: {
-          title: 'Sign-in Error',
-          description: "We're having trouble signing you in right now. Please try again in a moment."
-        },
         signOut: {
           title: 'Sign-out Error',
-          description: "We couldn't sign you out properly. Please close the app and try again."
-        },
-        stateChange: {
-          title: 'Session Error',
-          description: 'Something unexpected happened with your session. Please try signing in again.'
-        },
-        useAuthHook: {
-          title: 'Technical Issue',
-          description: "There's a technical issue with the app. Please restart and try again."
+          description: "We couldn't sign you out properly. Please close the app and try again.",
         },
       },
     },
     profile: {
       createTitle: 'Create Your Profile',
-      displayNameLabel: 'Display Name',
+      displayNameLabel: 'User Name',
       displayNamePlaceholder: 'Enter your name',
       create: 'Create Profile',
       creating: 'Creating...',
@@ -60,15 +51,11 @@ export default {
       errors: {
         nameRequired: {
           title: 'Name Required',
-          description: 'Please enter a display name to create your profile.'
-        },
-        notAuthenticated: {
-          title: 'Authentication Error',
-          description: 'You need to be logged in to create a profile. Please sign in again.'
+          description: 'Please enter a display name to create your profile.',
         },
         createFailed: {
           title: 'Profile Creation Failed',
-          description: 'We couldn\'t create your profile. Please try again later.'
+          description: "We couldn't create your profile. Please try again later.",
         },
       },
     },

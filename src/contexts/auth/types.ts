@@ -13,5 +13,4 @@ export type AuthContextType = {
   isCheckingProfile: boolean;
   signOut: () => Promise<void>;
   refreshAuth: () => Promise<void>;
-  error: Error | null;
 };
