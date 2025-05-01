@@ -3,7 +3,7 @@ import { ProtectedRoute } from '~/components/auth/ProtectedRoute';
 import { useAuth } from '~/contexts/auth';
 import { Button } from '~/components/ui/button';
 import { useTranslation } from 'react-i18next';
-import { useToast } from '~/utils/useToast';
+import { useToast } from '~/hooks/useToast';
 import {useEffect} from "react";
 
 export default function Feed() {
@@ -14,9 +14,9 @@ export default function Feed() {
 
   useEffect(() => {
     if (error) {
-      showError(error.message);
+      showError(t('auth.error'), error.message);
     }
-  }, [error, showError]);
+  }, [error, showError, t]);
 
   return (
     <ProtectedRoute>

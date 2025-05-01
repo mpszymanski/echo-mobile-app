@@ -10,8 +10,10 @@ export default {
       placeholder: 'Numer telefonu',
       button: 'Kontynuuj',
       errors: {
-        sendOTP:
-          'Ups! Nie mogliśmy wysłać kodu weryfikacyjnego. Sprawdź swój numer telefonu i spróbuj ponownie.',
+        sendOTP: {
+          title: 'Błąd kodu weryfikacyjnego',
+          description: 'Nie mogliśmy wysłać kodu weryfikacyjnego. Sprawdź swój numer telefonu i spróbuj ponownie.'
+        },
       },
     },
     authToken: {
@@ -19,8 +21,10 @@ export default {
       description: 'Wysłaliśmy kod weryfikacyjny na Twój telefon. Wprowadź go poniżej.',
       button: 'Weryfikuj',
       errors: {
-        verifyOTP:
-          'Hmm, ten kod nie wydaje się poprawny. Sprawdź go dokładnie i spróbuj ponownie lub poproś o nowy kod.',
+        verifyOTP: {
+          title: 'Nieprawidłowy kod',
+          description: 'Ten kod nie wydaje się poprawny. Sprawdź go dokładnie i spróbuj ponownie lub poproś o nowy kod.'
+        },
       },
     },
     profile: {
@@ -31,10 +35,18 @@ export default {
       creating: 'Tworzenie profilu...',
       loading: 'Sprawdzanie profilu...',
       errors: {
-        nameRequired: 'Nazwa wyświetlana jest wymagana',
-        notAuthenticated: 'Musisz być zalogowany, aby utworzyć profil',
-        checkFailed: 'Nie udało się sprawdzić profilu. Spróbuj ponownie.',
-        createFailed: 'Nie udało się utworzyć profilu. Spróbuj ponownie.',
+        nameRequired: {
+          title: 'Nazwa jest wymagana',
+          description: 'Wprowadź nazwę wyświetlaną, aby utworzyć swój profil.'
+        },
+        notAuthenticated: {
+          title: 'Błąd uwierzytelniania',
+          description: 'Musisz być zalogowany, aby utworzyć profil. Zaloguj się ponownie.'
+        },
+        createFailed: {
+          title: 'Tworzenie profilu nie powiodło się',
+          description: 'Nie udało się utworzyć profilu. Spróbuj ponownie później.'
+        },
       },
     },
     auth: {
@@ -42,11 +54,22 @@ export default {
       error: 'Ups! Coś poszło nie tak',
       logout: 'Wyloguj',
       errors: {
-        unknown: 'Mamy problem z zalogowaniem Cię w tej chwili. Spróbuj ponownie za moment.',
-        signOut: 'Nie mogliśmy Cię poprawnie wylogować. Zamknij aplikację i spróbuj ponownie.',
-        stateChange: 'Coś nieoczekiwanego stało się z Twoją sesją. Spróbuj zalogować się ponownie.',
-        useAuthHook:
-          'Wystąpił techniczny problem z aplikacją. Uruchom ją ponownie i spróbuj jeszcze raz.',
+        unknown: {
+          title: 'Błąd logowania',
+          description: 'Mamy problem z zalogowaniem Cię w tej chwili. Spróbuj ponownie za moment.'
+        },
+        signOut: {
+          title: 'Błąd wylogowania',
+          description: 'Nie mogliśmy Cię poprawnie wylogować. Zamknij aplikację i spróbuj ponownie.'
+        },
+        stateChange: {
+          title: 'Błąd sesji',
+          description: 'Coś nieoczekiwanego stało się z Twoją sesją. Spróbuj zalogować się ponownie.'
+        },
+        useAuthHook: {
+          title: 'Problem techniczny',
+          description: 'Wystąpił techniczny problem z aplikacją. Uruchom ją ponownie i spróbuj jeszcze raz.'
+        },
       },
     },
   },

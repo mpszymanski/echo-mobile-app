@@ -9,7 +9,7 @@ import { CodeField } from '~/components/ui/code-field';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { verifyOTP } from '~/features/auth/verifyOTP';
 import { AuthGuard } from '~/components/auth/AuthGuard';
-import { useToast } from '~/utils/useToast';
+import { useToast } from '~/hooks/useToast';
 
 const inputLength = 6;
 
@@ -26,7 +26,10 @@ export default function Token() {
 
       push('/feed');
     } catch (err) {
-      showError(t('authToken.errors.verifyOTP'));
+      showError(
+        t('authToken.errors.verifyOTP.title'),
+        t('authToken.errors.verifyOTP.description')
+      );
     }
   };
 

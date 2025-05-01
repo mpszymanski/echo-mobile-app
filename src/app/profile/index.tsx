@@ -9,7 +9,7 @@ import { Input } from '~/components/ui/input';
 import { Button } from '~/components/ui/button';
 import { Text } from '~/components/ui/text';
 import { H1 } from '~/components/ui/typography';
-import { useToast } from '~/utils/useToast';
+import { useToast } from '~/hooks/useToast';
 
 export default function ProfileCreation() {
   const { t } = useTranslation();
@@ -37,12 +37,18 @@ export default function ProfileCreation() {
 
   const handleCreateProfile = async () => {
     if (!displayName.trim()) {
-      showError(t('profile.errors.nameRequired'));
+      showError(
+        t('profile.errors.nameRequired.title'),
+        t('profile.errors.nameRequired.description')
+      );
       return;
     }
 
     if (!user) {
-      showError(t('profile.errors.notAuthenticated'));
+      showError(
+        t('profile.errors.notAuthenticated.title'),
+        t('profile.errors.notAuthenticated.description')
+      );
       return;
     }
 
@@ -58,7 +64,10 @@ export default function ProfileCreation() {
       router.replace('/feed');
     } catch (err) {
       console.error('Error creating profile:', err);
-      showError(t('profile.errors.createFailed'));
+      showError(
+        t('profile.errors.createFailed.title'),
+        t('profile.errors.createFailed.description')
+      );
     } finally {
       setIsSubmitting(false);
     }

@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { useRouter } from 'expo-router';
 import { sendOTP } from '~/features/auth/sendOTP';
 import { AuthGuard } from '~/components/auth/AuthGuard';
-import { useToast } from '~/utils/useToast';
+import { useToast } from '~/hooks/useToast';
 
 const inputLength = 15;
 
@@ -28,7 +28,10 @@ export default function Phone() {
         params: { phoneNumber },
       });
     } catch (err) {
-      showError(t('authPhone.errors.sendOTP'));
+      showError(
+        t('authPhone.errors.sendOTP.title'),
+        t('authPhone.errors.sendOTP.description')
+      );
     }
   };
 
