@@ -14,6 +14,7 @@ export default function Feed() {
     try {
       await signOut();
     } catch (err) {
+      console.error('Error signing out:', err);
       showError(t('auth.errors.signOut.title'), t('auth.errors.signOut.description'));
     }
   };

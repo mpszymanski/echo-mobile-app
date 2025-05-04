@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { OnboardingState, OnboardingStep } from './types';
+import { OnboardingState } from './types';
 
 interface OnboardingContextType {
   state: OnboardingState;
@@ -7,12 +7,6 @@ interface OnboardingContextType {
   completeOnboarding: () => void;
   resetOnboarding: () => void;
 }
-
-const initialState: OnboardingState = {
-  currentStep: OnboardingStep.CHECKING,
-  completedSteps: [],
-  isComplete: false
-};
 
 const OnboardingContext = createContext<OnboardingContextType | undefined>(undefined);
 

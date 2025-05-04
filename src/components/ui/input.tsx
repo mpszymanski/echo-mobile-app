@@ -44,7 +44,7 @@ const PhoneInput = React.forwardRef<React.ElementRef<typeof MaskInput>, MaskInpu
   )
 );
 
-MaskInput.displayName = 'MaskInput';
+PhoneInput.displayName = 'MaskInput';
 
 const Input = React.forwardRef<React.ElementRef<typeof TextInput>, TextInputProps>(
   ({ className, placeholderClassName, ...props }, ref) => (

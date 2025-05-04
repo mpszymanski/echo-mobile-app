@@ -10,6 +10,9 @@ import { NAV_THEME } from '~/lib/rnr/constants';
 import { useColorScheme } from '~/lib/rnr/useColorScheme';
 import { AuthProvider } from '~/contexts/auth';
 
+import '../../global.css';
+import { TOAST_CONFIG } from '~/lib/rnr/toast.config';
+
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
   colors: NAV_THEME.light,
@@ -23,9 +26,6 @@ export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
 } from 'expo-router';
-
-import '../../global.css';
-import {TOAST_CONFIG} from "~/lib/rnr/toast.config";
 
 export default function RootLayout() {
   const hasMounted = React.useRef(false);
