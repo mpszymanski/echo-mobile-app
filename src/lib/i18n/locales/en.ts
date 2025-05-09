@@ -9,6 +9,7 @@ export default {
       description: "We'll send you a verification code to confirm your identity",
       placeholder: 'Phone number',
       button: 'Continue',
+      termsCheckbox: 'I accept the <0>Terms and Conditions</0> and <1>Data Policy</1>',
       errors: {
         sendOTP: {
           title: 'Verification Code Error',

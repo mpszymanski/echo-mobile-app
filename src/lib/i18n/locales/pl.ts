@@ -9,6 +9,7 @@ export default {
       description: 'Wyślemy Ci kod weryfikacyjny, aby potwierdzić Twoją tożsamość',
       placeholder: 'Numer telefonu',
       button: 'Kontynuuj',
+      termsCheckbox: 'Akceptuję <0>Regulamin</0> oraz <1>Politykę Danych</1>',
       errors: {
         sendOTP: {
           title: 'Błąd kodu weryfikacyjnego',
