@@ -55,11 +55,13 @@ This code is licensed under the Business Source License 1.1. You may view, modif
 
 See the [LICENSE](LICENSE) file for more details.
 
-## Code Formatting with Prettier
+## Code Formatting
 
-This project uses Prettier for code formatting to ensure a consistent code style across the codebase.
+### JavaScript/TypeScript Formatting with Prettier
 
-### Configuration
+This project uses Prettier for JavaScript and TypeScript code formatting to ensure a consistent code style across the codebase.
+
+#### Configuration
 
 The Prettier configuration is defined in `.prettierrc.js` and follows the popular Expo style with the following key settings:
 
@@ -70,22 +72,22 @@ The Prettier configuration is defined in `.prettierrc.js` and follows the popula
 - Semicolons at the end of statements
 - Tailwind CSS class sorting (via prettier-plugin-tailwindcss)
 
-### Usage
+#### Usage
 
 The following npm scripts have been added to package.json:
 
 - `npm run format` - Format all eligible files in the project
 - `npm run format:check` - Check if files are formatted correctly without modifying them
 
-### Integration with ESLint
+#### Integration with ESLint
 
 Prettier has been integrated with ESLint using `eslint-config-prettier` to disable ESLint rules that might conflict with Prettier's formatting.
 
-### Ignored Files
+#### Ignored Files
 
 Some files and directories are excluded from formatting. See `.prettierignore` for the complete list.
 
-### Editor Integration
+#### Editor Integration
 
 For the best development experience, it's recommended to install the Prettier extension for your code editor:
 
@@ -93,3 +95,27 @@ For the best development experience, it's recommended to install the Prettier ex
 - WebStorm/IntelliJ: [Prettier](https://plugins.jetbrains.com/plugin/10456-prettier)
 
 Configure your editor to format on save for a seamless experience.
+
+### SQL Formatting with pgFormatter
+
+This project uses pgFormatter for SQL code formatting to ensure a consistent style across all SQL files in the Supabase directory.
+
+#### Configuration
+
+The pgFormatter configuration is defined in the npm scripts and lint-staged configuration with the following key settings:
+
+- 2 spaces indentation
+- PostgreSQL SQL syntax
+- Lowercase function names
+- Uppercase SQL keywords
+- No extra newlines
+
+#### Usage
+
+The following npm script has been added to package.json:
+
+- `npm run format:sql` - Format all SQL files in the Supabase directory
+
+#### Integration with Git Hooks
+
+SQL formatting has been integrated with Git hooks using lint-staged to automatically format SQL files when they are committed.

@@ -1,10 +1,12 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import languageDetector from './languageDetector';
+import { languageDetector } from './languageDetector';
 
 // Import translations
 import en from './locales/en';
 import pl from './locales/pl';
+
+export type Language = 'en' | 'pl';
 
 // Configure i18next
 i18n
@@ -25,4 +27,4 @@ i18n
     },
   });
 
-export default i18n;
+export { i18n };

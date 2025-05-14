@@ -1,5 +1,12 @@
 export default {
   translation: {
+    policy: {
+      terms: 'Terms and Conditions',
+      privacy: 'Data Policy',
+      loading: 'Loading policy...',
+      error: 'We failed to load policy. Try again later.',
+      notAvailable: 'No policy available',
+    },
     welcome: {
       header: 'Welcome to Echo',
       text: 'Log in or sign up to get started',

@@ -1,7 +1,7 @@
 import * as Localization from 'expo-localization';
 import type { LanguageDetectorModule } from 'i18next';
 
-const languageDetector: LanguageDetectorModule = {
+export const languageDetector: LanguageDetectorModule = {
   type: 'languageDetector',
   init: () => {},
   detect: (): string => {
@@ -11,5 +11,3 @@ const languageDetector: LanguageDetectorModule = {
   },
   cacheUserLanguage: () => {},
 };
-
-export default languageDetector;

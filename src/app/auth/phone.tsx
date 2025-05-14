@@ -39,14 +39,14 @@ export default function Phone() {
   const termsAndConditionButton = (
     <Text
       className="font-semibold text-foreground underline"
-      onPress={() => push('/terms-and-conditions')}
+      onPress={() => push('/policy?type=terms')}
     />
   );
 
   const dataPolicyButton = (
     <Text
       className="font-semibold text-foreground underline"
-      onPress={() => push('/data-policy')}
+      onPress={() => push('/policy?type=privacy')}
     />
   );
 

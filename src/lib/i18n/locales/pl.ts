@@ -1,5 +1,12 @@
 export default {
   translation: {
+    policy: {
+      terms: 'Regulamin',
+      privacy: 'Polityka Danych',
+      loading: 'Ładowanie regulaminu...',
+      error: 'Nie udało się załadować regulaminu. Spróbuj ponownie później.',
+      notAvailable: 'Brak dostępnego regulaminu',
+    },
     welcome: {
       header: 'Witaj w Echo',
       text: 'Zaloguj się lub zarejestruj',
